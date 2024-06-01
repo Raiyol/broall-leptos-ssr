@@ -1,0 +1,22 @@
+@use "colors" as colors;
+@import "header.scss";
+@import "fonts.scss";
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: LexendVariable, Lexend, sans-serif;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+main {
+  background-color: colors.$bg-color;
+  color: colors.$color;
+  height: 100%;
+  padding: 0 20px;
+}

@@ -1,0 +1,52 @@
+$header-height: 56px;
+
+header {
+    display: flex;
+    min-height: $header-height;
+    height: $header-height;
+    align-items: center;
+    padding: 0 20px;
+    background-color: colors.$primary;
+
+    button svg {
+        font-size: 24px;
+    }
+
+    .title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: white;
+        text-decoration-line: none;
+        margin: auto;
+    }
+}
+
+nav.nav-top {
+    position: fixed;
+    top: $header-height;
+    width: 100%;
+    background-color: colors.$gray;
+    opacity: 0.95;
+    height: calc(100% - $header-height);
+
+    ul {
+        padding: 10px 0;
+        margin: 0;
+        list-style-type: none;
+
+        li {
+            height: 40px;
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
+            font-weight: 600;
+
+            a {
+                width: 100%;
+                padding: 10px 40px;
+                color: white;
+                text-decoration-line: none;
+            }
+        }
+    }
+}
