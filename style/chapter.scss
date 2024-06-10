@@ -1,0 +1,75 @@
+@use "colors" as colors;
+
+div.chapter-page {
+  padding: 20px 0;
+
+  div.titles {
+    a {
+      font-size: .9rem;
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+  }
+
+  div.actions {
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+    margin: 30px 0;
+    justify-content: space-between;
+
+    > div {
+      display: flex;
+      align-items: center;
+      column-gap: 5px;
+    }
+  }
+
+  div.content {
+    font-size: var(--font-size);
+    line-height: var(--line-height);
+
+    p.cn {
+      letter-spacing: 1px;
+
+      span {
+        cursor: pointer;
+
+        &.box {
+          background-color: colors.$word-bg-color;
+          border-radius: 4px;
+        }
+      }
+    }
+  }
+
+  div.bottom-nav {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+div.tooltip.dict {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  div.def {
+    border-top: 1px solid white;
+    text-align: center;
+  }
+}
+
+div.modal-text-options {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+
+  div.select {
+    display: flex;
+    flex-direction: column;
+    row-gap: 4px;
+  }
+}

@@ -1,52 +1,122 @@
+@use "colors" as colors;
+
 $header-height: 56px;
 
 header {
+  display: flex;
+  min-height: $header-height;
+  height: $header-height;
+  align-items: center;
+  padding: 0 20px;
+  background-color: colors.$primary;
+
+  button svg {
+    font-size: 24px;
+  }
+
+  .title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: white;
+    text-decoration-line: none;
+    margin: auto;
+  }
+}
+
+div.search {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  z-index: 1;
+  background-color: colors.$primary;
+  transition: width 0.5s ease, opacity 0.5s ease;
+
+  &:not(.show) {
+    opacity: 0;
+    width: 0;
+
+    > * {
+      display: none;
+    }
+
+    div.input {
+      display: none;
+
+      span {
+        display: none;
+      }
+    }
+
+  }
+
+  &.show {
+    column-gap: 5px;
+    opacity: 1;
+    width: 100%;
+  }
+
+  div.input {
     display: flex;
-    min-height: $header-height;
-    height: $header-height;
     align-items: center;
-    padding: 0 20px;
-    background-color: colors.$primary;
+    width: 100%;
+    padding-left: 10px;
 
-    button svg {
-        font-size: 24px;
+    span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      position: absolute;
+
+      svg {
+        width: 20px;
+        height: 20px;
+        color: colors.$gray;
+      }
     }
 
-    .title {
-        font-size: 1.5rem;
-        font-weight: 600;
-        color: white;
-        text-decoration-line: none;
-        margin: auto;
+    input {
+      padding: 7px 16px 7px 34px;
+      width: 100%;
+      border-radius: 20px;
+      font-size: 14px;
     }
+  }
+
+  .btn-search {
+    margin-right: 5px;
+  }
 }
 
 nav.nav-top {
-    position: fixed;
-    top: $header-height;
-    width: 100%;
-    background-color: colors.$gray;
-    opacity: 0.95;
-    height: calc(100% - $header-height);
+  position: fixed;
+  top: $header-height;
+  width: 100%;
+  background-color: colors.$gray;
+  opacity: 0.95;
+  height: calc(100% - $header-height);
+  z-index: 1;
 
-    ul {
-        padding: 10px 0;
-        margin: 0;
-        list-style-type: none;
+  ul {
+    padding: 10px 0;
+    margin: 0;
+    list-style-type: none;
 
-        li {
-            height: 40px;
-            display: flex;
-            align-items: center;
-            font-size: 1rem;
-            font-weight: 600;
+    li {
+      height: 40px;
+      display: flex;
+      align-items: center;
+      font-size: 1rem;
+      font-weight: 600;
 
-            a {
-                width: 100%;
-                padding: 10px 40px;
-                color: white;
-                text-decoration-line: none;
-            }
-        }
+      a {
+        width: 100%;
+        padding: 10px 40px;
+        color: white;
+        text-decoration-line: none;
+      }
     }
+  }
 }

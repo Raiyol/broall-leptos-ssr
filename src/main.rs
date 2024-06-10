@@ -1,24 +1,21 @@
+
+#[cfg(feature = "ssr")]
+pub mod server;
+pub mod beans;
+
 #[cfg(feature = "ssr")]
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     use actix_files::Files;
     use actix_web::*;
-    use leptos::*;
+    use leptos::{*, provide_context};
     use leptos_actix::{generate_route_list, LeptosRoutes};
     use broall_leptos_ssr::app::*;
-    
-    use diesel::MysqlConnection;
-    use diesel::r2d2::{ConnectionManager, Pool};
+
     use dotenvy::dotenv;
-    use std::env;
     dotenv().ok();
-    pub fn init_pool() -> Pool<ConnectionManager<MysqlConnection>> {
-        let conn_url = env::var("DATABASE_URL").expect("Failed to get value of DATABASE_URL");
-        let manager = ConnectionManager::<MysqlConnection>::new(&conn_url);
-        Pool::builder()
-            .build(manager)
-            .expect("Failed to create pool")
-    }
+
+    let context = move || provide_context(server::db::init_pool());
 
     let conf = get_configuration(None).await.unwrap();
     let addr = conf.leptos_options.site_addr;
@@ -31,21 +28,19 @@ async fn main() -> std::io::Result<()> {
         let site_root = &leptos_options.site_root;
 
         App::new()
-            // DB connections pool 
-            .app_data(web::Data::new(init_pool()))
             // serve JS/WASM/CSS from `pkg`
             .service(Files::new("/pkg", format!("{site_root}/pkg")))
             // serve other assets from the `assets` directory
             .service(Files::new("/assets", site_root))
             // serve the favicon from /favicon.ico
             .service(favicon)
-            .leptos_routes(leptos_options.to_owned(), routes.to_owned(), App)
+            .leptos_routes_with_context(leptos_options.to_owned(), routes.to_owned(), context, App)
             .app_data(web::Data::new(leptos_options.to_owned()))
         //.wrap(middleware::Compress::default())
     })
-    .bind(&addr)?
-    .run()
-    .await
+        .bind(&addr)?
+        .run()
+        .await
 }
 
 

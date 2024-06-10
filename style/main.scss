@@ -1,5 +1,10 @@
 @use "colors" as colors;
 @import "header.scss";
+@import "novels.scss";
+@import "novel.scss";
+@import "chapter.scss";
+@import "pagination.scss";
+@import "button.scss";
 @import "fonts.scss";
 
 html {
@@ -12,6 +17,16 @@ body {
   display: flex;
   flex-direction: column;
   height: 100%;
+
+  &.light-mode {
+    --color: #1F1926;
+    --background-color: white;
+  }
+
+  &.dark-mode {
+    --color: white;
+    --background-color: #1F1926;
+  }
 }
 
 main {
@@ -19,4 +34,14 @@ main {
   color: colors.$color;
   height: 100%;
   padding: 0 20px;
+  overflow: auto;
+}
+
+a.link {
+  text-decoration-line: none;
+  color: colors.$color;
+
+  &:hover {
+    opacity: .5;
+  }
 }

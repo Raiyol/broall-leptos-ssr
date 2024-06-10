@@ -1,9 +1,9 @@
 use diesel::prelude::*;
 use serde::{Deserialize, Serialize};
 
-use crate::models::novel::Novel;
-use crate::schema::schema::novel_genre;
-use crate::models::genre::Genre;
+use crate::server::models::novel::Novel;
+use crate::server::schema::novel_genre;
+use crate::server::models::genre::Genre;
 
 #[derive(Identifiable, Selectable, Serialize, Deserialize, Queryable, Associations, Debug, Clone)]
 #[diesel(belongs_to(Novel, foreign_key = id_novel))]

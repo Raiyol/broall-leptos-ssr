@@ -1,0 +1,47 @@
+@use "colors" as colors;
+
+.thaw-button.thaw-button--disabled {
+  color: colors.$gray !important;
+}
+
+a.button {
+  height: 34px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: min-content;
+  border: 1px solid;
+  border-radius: 5px;
+  box-sizing: border-box;
+  color: colors.$color;
+  padding: 0 14px;
+  text-decoration: none;
+  column-gap: 5px;
+
+  &.button-primary {
+    color: white;
+    background-color: colors.$primary;
+    border-color: colors.$primary;
+
+    &:hover {
+      background-color: colors.$primary-light;
+    }
+  }
+
+  &.button-outlined {
+    color: colors.$color;
+    background-color: inherit;
+    border-color: colors.$color;
+
+    &:hover {
+      color: colors.$primary;
+      border-color: colors.$primary;
+    }
+  }
+
+  &.button-circle {
+    border-radius: 50%;
+    width: 34px;
+    padding: 0;
+  }
+}

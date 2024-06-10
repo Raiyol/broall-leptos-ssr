@@ -1,0 +1,19 @@
+@use "colors" as colors;
+
+nav.pagination {
+  ul {
+    $pagination-item-size: 28px;
+
+    list-style-type: none;
+    display: flex;
+    padding: 0;
+    justify-content: center;
+    height: $pagination-item-size;
+
+    li {
+      width: $pagination-item-size;
+      height: $pagination-item-size;
+      text-align: center;
+    }
+  }
+}

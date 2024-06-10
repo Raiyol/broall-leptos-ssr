@@ -1,6 +1,9 @@
 pub mod app;
 pub mod containers;
 pub mod components;
+#[cfg(feature = "ssr")]
+pub mod server;
+pub mod beans;
 
 #[cfg(feature = "hydrate")]
 #[wasm_bindgen::prelude::wasm_bindgen]

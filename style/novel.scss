@@ -1,0 +1,71 @@
+@use "colors" as colors;
+
+
+div.novel-page {
+  padding: 20px 0;
+
+  div.cover {
+    text-align: center;
+
+    img {
+      width: 15rem;
+      border-radius: 0.5rem;
+      object-fit: contain;
+    }
+  }
+
+  h2.novel-title {
+    text-align: center;
+    margin-bottom: 0;
+  }
+
+  h3.og-novel-title {
+    text-align: center;
+    margin-top: 0;
+    opacity: .5;
+  }
+
+  ul.genres {
+    padding: 0;
+    list-style-type: none;
+    display: flex;
+    width: 100%;
+    column-gap: 5px;
+    row-gap: 5px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  div.chapters {
+    ul.chapters-list {
+      padding: 0;
+      list-style-type: none;
+
+      li {
+        min-height: 30px;
+
+        &:nth-child(odd) {
+          background-color: transparentize(colors.$gray, 0.75);
+        }
+
+        a {
+          height: 100%;
+          display: flex;
+          align-items: center;
+          column-gap: 10px;
+          padding: 10px;
+
+          span {
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+}
+
+div.thaw-modal-body {
+  div.thaw-card__header, div.thaw-card__content {
+    color: colors.$color;
+  }
+}

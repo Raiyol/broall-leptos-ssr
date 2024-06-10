@@ -1,9 +1,9 @@
 use diesel::prelude::*;
 use serde::{Deserialize, Serialize};
 
-use crate::models::review::Review;
-use crate::models::user::User;
-use crate::schema::schema::review_user_liked;
+use crate::server::models::review::Review;
+use crate::server::models::user::User;
+use crate::server::schema::review_user_liked;
 
 #[derive(
     Identifiable, Selectable, Serialize, Deserialize, Queryable, Associations, Debug, Clone,
