@@ -1,10 +1,12 @@
 use diesel::prelude::*;
 
 use crate::beans::chapter_resource::ChapterResource;
+use crate::beans::recent_chapter::RecentChapter;
 use crate::server::models::chapter::Chapter;
 use crate::server::models::novel::Novel;
 use crate::server::schema::*;
 use diesel::dsl::*;
+use crate::server::models::chapter::ChapterInfo;
 
 pub fn get_chapter_by_id(
     conn: &mut MysqlConnection,
@@ -33,4 +35,28 @@ pub fn get_chapter_by_id(
             test.1.expect("Novel should exist"),
         )
     }))
+}
+
+pub fn get_recent_chapters(
+    conn: &mut MysqlConnection,
+) -> Result<Vec<RecentChapter>, diesel::result::Error> {
+    let chapters_with_novel: Result<Vec<(ChapterInfo, Novel)>, diesel::result::Error> =
+        chapter::table
+            .inner_join(novel::table)
+            .select((ChapterInfo::as_select(), Novel::as_select()))
+            .limit(20)
+            .order(chapter::date.desc())
+            .load::<(ChapterInfo, Novel)>(conn);
+
+    chapters_with_novel.map(|op| {
+        op.into_iter()
+            .map(|(chapter_info, nov)| RecentChapter {
+                id: chapter_info.id,
+                url: nov.url.clone(),
+                name: nov.name.clone(),
+                chapter: chapter_info.number,
+                date: chapter_info.date,
+            })
+            .collect()
+    })
 }

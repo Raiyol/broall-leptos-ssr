@@ -44,5 +44,6 @@ export class Tooltip {
 
     destroy() {
         this.instance?.destroy();
+        this.instance = undefined;
     }
 }

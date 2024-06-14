@@ -1,4 +1,7 @@
-use leptos::{CollectView, component, create_resource, create_signal, IntoView, server, ServerFnError, SignalGet, Transition, view};
+use leptos::{
+    component, create_resource, create_signal, server, view, CollectView, IntoView, ServerFnError,
+    SignalGet, Transition,
+};
 use leptos_meta::Title;
 use leptos_router::A;
 use thaw::Divider;
@@ -10,8 +13,12 @@ use crate::beans::server_error_type::CustomError;
 use crate::components::pagination::Pagination;
 
 #[server]
-pub async fn get_novels(page: Pageable) -> Result<PageResponse<NovelWithShortChapters>, ServerFnError<CustomError>> {
-    crate::server::services::get_db_connexion_wrapper(|conn| crate::server::services::novel_service::find_all_novel(conn, page))
+pub async fn get_novels(
+    page: Pageable,
+) -> Result<PageResponse<NovelWithShortChapters>, ServerFnError<CustomError>> {
+    crate::server::services::get_db_connexion_wrapper(|conn| {
+        crate::server::services::novel_service::find_all_novel(conn, page)
+    })
 }
 
 #[component]
@@ -20,9 +27,7 @@ pub fn NovelsPage() -> impl IntoView {
     let (page, set_page) = create_signal(Pageable::of(0, 10));
     let novels_page = create_resource(
         move || page.get(),
-        |value| async move {
-            get_novels(value).await
-        },
+        |value| async move { get_novels(value).await },
     );
 
     view! {
@@ -46,7 +51,7 @@ pub fn NovelsPage() -> impl IntoView {
                                         <img src=format!("/assets/media/novel/{}", novel.novel.img.unwrap_or("unknown.jpg".to_string())) alt=&novel.novel.name/>
                                     </A>
                                     <div class="novel-summary">
-                                        {novel.novel.summary.map(|summary| summary.split("\n")
+                                        {novel.novel.summary.map(|summary| summary.split('\n')
                                             .map(|paragraphe| view! {<p>{paragraphe.to_string()}</p>})
                                             .collect_view()
                                         )}

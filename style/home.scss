@@ -1,0 +1,32 @@
+@use "colors" as colors;
+
+div.home-page {
+  ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    border: 1px solid colors.$word-bg-color;
+    border-radius: 5px;
+    padding: 0;
+
+    li {
+      column-gap: 5px;
+      align-items: center;
+      padding: 10px;
+      border-bottom: 1px solid colors.$word-bg-color;
+
+      a {
+        .chapter-number {
+          font-weight: 700;
+          margin-right: 5px;
+        }
+      }
+
+      .date {
+        opacity: .5;
+        margin-left: 5px;
+      }
+    }
+  }
+}
