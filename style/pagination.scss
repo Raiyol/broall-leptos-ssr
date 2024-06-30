@@ -9,9 +9,10 @@ nav.pagination {
     padding: 0;
     justify-content: center;
     height: $pagination-item-size;
+    column-gap: 5px;
 
     li {
-      width: $pagination-item-size;
+      min-width: $pagination-item-size;
       height: $pagination-item-size;
       text-align: center;
     }

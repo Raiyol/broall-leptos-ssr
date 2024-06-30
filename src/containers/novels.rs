@@ -37,7 +37,7 @@ pub fn NovelsPage() -> impl IntoView {
             {move || novels_page.get().map(|result|
                 result.map(|page_response|
                     view! {
-                        <Pagination page page_total=page_response.page_total set_page />
+                        <Pagination count=page_response.page_total />
                         <ul class="novels">
                         {
                             let novels_in_view = page_response.results.len();
@@ -61,7 +61,7 @@ pub fn NovelsPage() -> impl IntoView {
                             }}).collect_view()
                         }
                         </ul>
-                        <Pagination page page_total=page_response.page_total set_page />
+                        // <Pagination page count=page_response.page_total set_page />
                     }
                 )
             )}

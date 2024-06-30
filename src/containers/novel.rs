@@ -39,7 +39,7 @@ pub fn NovelPage() -> impl IntoView {
     };
     let novel_page = create_resource(url, |value| async move { get_novel(value).await });
     // Pagination for chapters
-    let (page, set_page) = create_signal(Pageable::of(0, 100));
+    let (page, set_page) = create_signal(Pageable::of(0, 1));
 
     view! {
         <div class="novel-page">
@@ -78,7 +78,7 @@ pub fn NovelPage() -> impl IntoView {
                                 <div class="chapters">
                                     {
                                         move || view! {
-                                            <Pagination page page_total=page.get_untracked().get_total_page_count(novel.chapters.len()) set_page />
+                                            <Pagination count=page.get_untracked().get_total_page_count(novel.chapters.len()) />
                                             {
                                                 let page_info = page.get();
                                                 let start = (page_info.page_size * page_info.page_number) as usize;
@@ -96,7 +96,7 @@ pub fn NovelPage() -> impl IntoView {
                                                     </ul>
                                                 }
                                             }
-                                            <Pagination page page_total=page.get_untracked().get_total_page_count(novel.chapters.len()) set_page />
+                                            // <Pagination page count=page.get_untracked().get_total_page_count(novel.chapters.len()) set_page />
                                         }
                                     }
                                 </div>
